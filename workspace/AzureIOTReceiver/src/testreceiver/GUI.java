@@ -129,7 +129,8 @@ public class GUI {
 
 				if (userSelection == JFileChooser.APPROVE_OPTION) {
 					file = fileChooser.getSelectedFile();
-					file = new File(file.getPath() + ".csv");
+					if (!file.toString().contains(".csv"))
+						file = new File(file.getPath() + ".csv");
 
 				} else
 					return;
