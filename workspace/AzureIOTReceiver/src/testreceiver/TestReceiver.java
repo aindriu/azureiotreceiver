@@ -14,7 +14,6 @@ import com.microsoft.azure.servicebus.*;
 
 import java.nio.charset.Charset;
 import java.time.*;
-import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -55,11 +54,8 @@ public class TestReceiver {
 
 		public void run() {
 			try {
-				double avgWindSpeed = 10; // m/s
-				Random rand = new Random();
 
 				while (true) {
-					double currentWindSpeed = avgWindSpeed + rand.nextDouble() * 4 - 2;
 					StringDataPoint strDataPoint = new StringDataPoint();
 					strDataPoint.deviceId = deviceId;
 

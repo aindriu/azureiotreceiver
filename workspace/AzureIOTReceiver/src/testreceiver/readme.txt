@@ -15,9 +15,8 @@ Add the connection string from the microsoft azure IOT site as the connection st
 Add the json string as this:
     {
         "device" : "{device}",
-        
         "time" : {time},
-"data" : "{data}"
+        "data" : "{data}"
     }
 
 
