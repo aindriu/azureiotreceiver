@@ -87,6 +87,7 @@ public class TestReceiver {
 		EventHubClient client = null;
 		try {
 			client = EventHubClient.createFromConnectionStringSync(connStr);
+			
 		} catch (Exception e) {
 			System.out.println("Failed to create client: " + e.getMessage());
 			System.exit(1);
@@ -133,6 +134,7 @@ public class TestReceiver {
 
 		EventHubClient client0 = receiveMessages("0");
 		EventHubClient client1 = receiveMessages("1");
+
 		System.out.println("Press ENTER to exit.");
 		System.in.read();
 		try {
