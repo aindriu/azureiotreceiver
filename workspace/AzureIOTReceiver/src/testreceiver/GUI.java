@@ -72,6 +72,7 @@ public class GUI {
 
 		frame.add(connString, gc);
 
+		/*
 		gc = new GridBagConstraints();
 		gc.gridx = 1;
 		gc.gridy = 2;
@@ -86,7 +87,7 @@ public class GUI {
 		partString = new JTextField("0", 20);
 
 		frame.add(partString, gc);
-
+*/
 		gc = new GridBagConstraints();
 		gc.gridx = 3;
 		gc.gridy = 3;
@@ -158,6 +159,24 @@ public class GUI {
 			}
 		});
 
+		gc = new GridBagConstraints();
+		gc.gridx = 6;
+		gc.gridy = 3;
+		gc.insets = new Insets(5, 5, 5, 5);
+		JButton addDeviceButton = new JButton("Add Device");
+		frame.add(addDeviceButton, gc);
+		addDeviceButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				DeviceAddPopup dap = new DeviceAddPopup();
+				dap.init();
+			}
+		}
+		);
+		
+			
+			
 		String[] columnNames = { "Device ID", "Time", "Payload" };
 		/*
 		 * Object[][] data = { {"23434234", "34543534", "teststring"},

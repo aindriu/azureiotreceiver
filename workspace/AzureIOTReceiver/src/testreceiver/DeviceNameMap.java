@@ -46,7 +46,7 @@ public class DeviceNameMap {
 		
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(f,  true));
-			bw.append(id + "," + name);
+			bw.append(id + "," + name + "\n");
 			bw.close();
 			load();
 		} catch (IOException e) {

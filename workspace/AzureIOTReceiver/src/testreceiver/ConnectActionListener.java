@@ -25,7 +25,8 @@ public class ConnectActionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		EventHubClient client0 = receiveMessages("" + testGUI.getPartitionID());
+		EventHubClient client0 = receiveMessages("0");
+		EventHubClient client1 = receiveMessages("1");
 
 	}
 
