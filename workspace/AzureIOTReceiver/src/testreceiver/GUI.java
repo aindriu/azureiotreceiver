@@ -68,7 +68,7 @@ public class GUI {
 
 		connString = new JTextField(
 				"Endpoint=sb://iothub-ns-riv-144717-4d6a93f30c.servicebus.windows.net/;EntityPath=riv;SharedAccessKeyName=iothubowner;SharedAccessKey=lkqf7Ycx56OlZGPg0YzYhF8S0u+YBbnhCV/ohHXmBvM=",
-				20);
+				40);
 
 		frame.add(connString, gc);
 
