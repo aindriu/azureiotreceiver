@@ -62,7 +62,9 @@ public class ConnectActionListener implements ActionListener {
 											long a = receivedEvent.getSystemProperties().getEnqueuedTime()
 													.toEpochMilli();
 											String st = obj.getString("data");
-											testGUI.addToTable(d, "" + a, st);
+											String deviceName = DeviceNameMap.get(d);
+											if (deviceName == null) deviceName = d;
+											testGUI.addToTable(deviceName, "" + a, st);
 											batchSize++;
 										}
 									}
