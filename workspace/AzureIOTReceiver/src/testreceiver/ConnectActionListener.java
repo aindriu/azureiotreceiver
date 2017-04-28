@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 
 import javax.swing.JOptionPane;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.microsoft.azure.eventhubs.EventData;
@@ -58,15 +59,19 @@ public class ConnectActionListener implements ActionListener {
 
 											JSONObject obj = new JSONObject(
 													new String(receivedEvent.getBody(), Charset.defaultCharset()));
-											String d = obj.getString("device");
-											// long a = obj.getLong("time");
-											long a = receivedEvent.getSystemProperties().getEnqueuedTime()
+											try {
+												String d = obj.getString("device");
+												// long a = obj.getLong("time");
+												long a = receivedEvent.getSystemProperties().getEnqueuedTime()
 													.toEpochMilli();
-											String st = obj.getString("data");
-											String deviceName = DeviceNameMap.get(d);
-											if (deviceName == null) deviceName = d;
-											testGUI.addToTable(deviceName, "" + a, st);
-											batchSize++;
+												String st = obj.getString("data");
+												String deviceName = DeviceNameMap.get(d);
+												if (deviceName == null) deviceName = d;
+												testGUI.addToTable(deviceName, "" + a, st);
+												batchSize++;
+											}
+											catch (JSONException je)
+											{}
 										}
 									}
 
