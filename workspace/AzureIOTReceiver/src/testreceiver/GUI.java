@@ -13,6 +13,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -177,7 +178,7 @@ public class GUI {
 		
 			
 			
-		String[] columnNames = { "Device ID", "Time", "Payload" };
+		String[] columnNames = { "Device ID", "Date", "Time", "Payload" };
 		/*
 		 * Object[][] data = { {"23434234", "34543534", "teststring"},
 		 * {"34432432", "43545435", "anotherstring"}, {"35543535", "34435454",
@@ -233,7 +234,13 @@ public class GUI {
 			String s = str.substring(i, i + 2);
 			output.append((char) Integer.parseInt(s, 16));
 		}
-
-		model.addRow(new Object[] { deviceName, d.toString(), output.toString() });
+		
+		SimpleDateFormat f = new SimpleDateFormat("HH:mm:ss");
+	    String strTime = f.format(d);
+	    
+	    SimpleDateFormat f1 = new SimpleDateFormat("dd-MM-yyyy");
+	    String strDate = f1.format(d);
+	    
+		model.addRow(new Object[] { deviceName, strDate, strTime, output.toString() });
 	}
 }

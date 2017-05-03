@@ -4,6 +4,7 @@ import com.microsoft.azure.sdk.iot.service.exceptions.IotHubException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Date;
 
 public class Cloud2DeviceSender {
 
@@ -26,6 +27,9 @@ public class Cloud2DeviceSender {
 				     if (feedbackReceiver != null) feedbackReceiver.open();
 
 				     Message messageToSend = new Message("test message");
+				     Date d = new Date();
+				     d.setHours(d.getHours() + 3);
+				     messageToSend.setExpiryTimeUtc(d);
 				     messageToSend.setDeliveryAcknowledgement(DeliveryAcknowledgement.Full);
 
 				     serviceClient.send(deviceId, messageToSend);
