@@ -26,10 +26,10 @@ public class Cloud2DeviceSender {
 				       .getFeedbackReceiver(deviceId);
 				     if (feedbackReceiver != null) feedbackReceiver.open();
 
-				     Message messageToSend = new Message("test message");
-				     Date d = new Date();
-				     d.setHours(d.getHours() + 3);
-				     messageToSend.setExpiryTimeUtc(d);
+				     Message messageToSend = new Message("0102030405060708");
+				    // Date d = new Date();
+				    // d.setHours(d.getHours() + 3);
+				    // messageToSend.setExpiryTimeUtc(d);
 				     messageToSend.setDeliveryAcknowledgement(DeliveryAcknowledgement.Full);
 
 				     serviceClient.send(deviceId, messageToSend);
