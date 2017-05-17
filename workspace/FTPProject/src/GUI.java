@@ -21,6 +21,7 @@ public class GUI {
 
 	private JLabel imageLabel;
 	private LocalFTPClient localFTPClient;
+	private File fl;
 	
 	public GUI(LocalFTPClient f) {
 		this.localFTPClient = f;
@@ -146,13 +147,14 @@ public class GUI {
 		JButton connectB = new JButton("Connect");
 		frame.add(connectB, gc);
 		
-		/*
+		
 		connectB.addActionListener(new ActionListener() {
 
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				LocalFTPClient f = new LocalFTPClient();
+				/*
 				File fl = f.downloadNewestFile();
 				if (fl != null)
 				{
@@ -162,10 +164,57 @@ public class GUI {
 					frame.pack();
 					frame.repaint();
 				}
+				*/
 				
+				Thread t = new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						for (;;)
+						{
+							fl = f.downloadNewestFile();
+							if (fl != null)
+							{
+								ImageIcon image = new ImageIcon(fl.getAbsolutePath());
+								image.getImage().flush();
+								imageLabel.setIcon(image);
+								frame.pack();
+								frame.repaint();
+								//fl.delete();
+							}
+							
+							
+							File downloadedFiles = new File(System.getProperty("user.dir"));
+						
+							File[] listOfFiles = downloadedFiles.listFiles();
+
+							    for (int i = 0; i < listOfFiles.length; i++) {
+							    	
+							      if (fl != null && listOfFiles[i].getName().equals(fl.getName()))
+							    	  continue;
+							      if (listOfFiles[i].isFile() && (listOfFiles[i].getName().contains(".gif") || listOfFiles[i].getName().contains(".jpg") || listOfFiles[i].getName().contains(".jpeg"))) {
+							        listOfFiles[i].delete();
+							      }
+							    }
+							    
+							    
+							
+							f.moveAllFiles();
+							try {
+								Thread.sleep(10000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+							
+						}
+					} });
+				t.start();
+				connectB.setEnabled(false);
 			} });
 		
-		*/
+		
 		gc = new GridBagConstraints();
 		gc.gridx = 1;
 		gc.gridy = 4;
@@ -177,6 +226,7 @@ public class GUI {
         imageLabel = new JLabel(image); 
         frame.add(imageLabel,gc);
         
+        frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         frame.pack();
 		frame.setVisible(true);
         	

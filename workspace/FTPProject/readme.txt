@@ -1,10 +1,10 @@
 README.TXT
 
-I created two classes. The GUI class is just a class that prompts for username / password and host / port and a connect button. There is also a properties config file called config.properties that loads the configuration information to the GUI before you connect.
+This application continously scans files placed in the root directory of the FTP Server and moves them into directories based on their
+timestamp.
 
-The LocalFTPClient class has some methods that interact with the FTP server. 
+So, when a new image is loaded into the root directory, it gets placed into the directory.
 
-createNewestFolder() creates a folder in the ftp server with the current date.
-
-downloadNewestFile() downloads the newest image on the ftp server.
-
+To make it startup on startup
+Press Windows+R to open the “Run” dialog box. Type “shell:startup” and then hit Enter to open the “Startup” folder. 
+Create a shortcut in the “Startup” folder to any file, folder, or app's executable file. It will open on startup the next time you boot.
