@@ -46,6 +46,21 @@ public class GUI {
 		String username = "andrew";
 		String password = "test";
 		
+		/* Clear any downloaded image files */
+		File downloadedFiles = new File(System.getProperty("user.dir"));
+		
+		File[] listOfFiles = downloadedFiles.listFiles();
+
+		    for (int i = 0; i < listOfFiles.length; i++) {
+		    	
+		      if (fl != null && listOfFiles[i].getName().equals(fl.getName()))
+		    	  continue;
+		      if (listOfFiles[i].isFile() && (listOfFiles[i].getName().contains(".gif") || listOfFiles[i].getName().contains(".jpg") || listOfFiles[i].getName().contains(".jpeg"))) {
+		        listOfFiles[i].delete();
+		      }
+		    }
+		    
+		
 		if (inputStream != null)
 		{
 			try {
@@ -153,18 +168,7 @@ public class GUI {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				LocalFTPClient f = new LocalFTPClient();
-				/*
-				File fl = f.downloadNewestFile();
-				if (fl != null)
-				{
-					ImageIcon image = new ImageIcon(fl.getAbsolutePath());
-					image.getImage().flush();
-					imageLabel.setIcon(image);
-					frame.pack();
-					frame.repaint();
-				}
-				*/
+				
 				
 				Thread t = new Thread(new Runnable() {
 
@@ -172,7 +176,7 @@ public class GUI {
 					public void run() {
 						for (;;)
 						{
-							fl = f.downloadNewestFile();
+							fl = localFTPClient.downloadNewestFile();
 							if (fl != null)
 							{
 								ImageIcon image = new ImageIcon(fl.getAbsolutePath());
@@ -199,7 +203,7 @@ public class GUI {
 							    
 							    
 							
-							f.moveAllFiles();
+							localFTPClient.moveAllFiles();
 							try {
 								Thread.sleep(10000);
 							} catch (InterruptedException e) {
@@ -229,6 +233,8 @@ public class GUI {
         frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         frame.pack();
 		frame.setVisible(true);
+		
+		connectB.doClick();
         	
 	}
 }

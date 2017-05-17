@@ -11,6 +11,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPClientConfig;
 import org.apache.commons.net.ftp.FTPFile;
@@ -71,7 +73,7 @@ public class LocalFTPClient {
 	    boolean error = false;
 	    try {
 	      int reply;
-	      String server = "localhost";
+	      String server = hostname;
 	      ftp.connect(server);
 	      
 
@@ -80,10 +82,11 @@ public class LocalFTPClient {
 
 	      if(!FTPReply.isPositiveCompletion(reply)) {
 	        ftp.disconnect();
-	        System.err.println("FTP server refused connection.");
-	        System.exit(1);
+	        JOptionPane.showMessageDialog(null, "FTP Server refused connection ", "ERROR",
+					JOptionPane.WARNING_MESSAGE);
 	      }
-	      ftp.login("andrew", "test");
+	      boolean success = ftp.login(username, password);
+	     
 	      String dir = ftp.printWorkingDirectory();
 	      //System.out.println(dir);
 	      FTPFile[] files = ftp.listFiles(dir);
@@ -129,7 +132,7 @@ public class LocalFTPClient {
 		  		  //System.out.println("Month " + month + " Year " + year);
 		  		  
 		  		  FTPFile folder = createFolder("127.0.0.1", year, month);
-		  		  System.out.println(folder.getName());
+		  		 // System.out.println(folder.getName());
 		  		  
 		  		 
 		  		  ftp.rename(f.getName(), "/" + folder.getName() + "/" + f.getName());
@@ -149,7 +152,8 @@ public class LocalFTPClient {
 	        try {
 	          ftp.disconnect();
 	        } catch(IOException ioe) {
-	          // do nothing
+	        	JOptionPane.showMessageDialog(null, "IO Issue: " + ioe.getMessage(), "ERROR",
+						JOptionPane.WARNING_MESSAGE);
 	        }
 	      }
 	    }
@@ -175,17 +179,17 @@ public class LocalFTPClient {
 	    boolean error = false;
 	    try {
 	      int reply;
-	      String server = "localhost";
+	      String server = hostname;
 	      ftp.connect(server);
 	      
 	      reply = ftp.getReplyCode();
 
 	      if(!FTPReply.isPositiveCompletion(reply)) {
 	        ftp.disconnect();
-	        System.err.println("FTP server refused connection.");
-	        System.exit(1);
+	        JOptionPane.showMessageDialog(null, "FTP Server refused connection: ", "ERROR",
+					JOptionPane.WARNING_MESSAGE);
 	      }
-	      ftp.login("andrew", "test");
+	      ftp.login(username, password);
 	      String dir = ftp.printWorkingDirectory();
 	      
 	      FTPFile[] files = ftp.listFiles(dir);
@@ -219,7 +223,8 @@ public class LocalFTPClient {
 	        try {
 	          ftp.disconnect();
 	        } catch(IOException ioe) {
-	          // do nothing
+	        	JOptionPane.showMessageDialog(null, "IO Issue: " + ioe.getMessage(), "ERROR",
+						JOptionPane.WARNING_MESSAGE);
 	        }
 	      }
 	    }
@@ -234,7 +239,7 @@ public class LocalFTPClient {
 	    boolean error = false;
 	    try {
 	      int reply;
-	      String server = "localhost";
+	      String server = hostname;
 	      ftp.connect(server);
 	      
 
@@ -243,10 +248,10 @@ public class LocalFTPClient {
 
 	      if(!FTPReply.isPositiveCompletion(reply)) {
 	        ftp.disconnect();
-	        System.err.println("FTP server refused connection.");
-	        System.exit(1);
+	        JOptionPane.showMessageDialog(null, "FTP Server refused connection: ", "ERROR",
+					JOptionPane.WARNING_MESSAGE);
 	      }
-	      ftp.login("andrew", "test");
+	      ftp.login(username, password);
 	      String dir = ftp.printWorkingDirectory();
 	      //System.out.println(dir);
 	      FTPFile[] files = ftp.listFiles(dir);
@@ -313,7 +318,8 @@ public class LocalFTPClient {
 	        try {
 	          ftp.disconnect();
 	        } catch(IOException ioe) {
-	          // do nothing
+	        	JOptionPane.showMessageDialog(null, "IO Issue: " + ioe.getMessage(), "ERROR",
+						JOptionPane.WARNING_MESSAGE);
 	        }
 	      }
 	    }
